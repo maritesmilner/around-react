@@ -1,0 +1,29 @@
+.form__close-button {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  border: none;
+  background-size: 30px 30px;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 58 58" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M44.7661 41.5683L31.9759 28.778L44.7661 15.9878L41.5686 12.7902L28.7783 25.5805L15.9881 12.7902L12.7905 15.9878L25.5808 28.778L12.7905 41.5683L15.9881 44.7658L28.7783 31.9756L41.5686 44.7658L44.7661 41.5683Z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
+  transition: .5s ease;
+}
+.form__close-button:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+
+@media screen and (min-width: 1024px) {
+  .form__close-button {
+    width: 40.7px;
+    height: 40.7px;
+    top: -40.7px;
+    right: -40.7px;
+    background-size: 40.7px 40.7px;
+  }
+}

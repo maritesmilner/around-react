@@ -1,0 +1,9 @@
+.form__pic {
+  max-width: 75vw;
+  display: block;
+}
+@media screen and (min-width: 1024px) {
+  .form__pic {
+    max-height: 75vh;
+  }
+}
