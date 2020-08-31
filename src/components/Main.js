@@ -4,6 +4,7 @@ import ImagePopup from './ImagePopup.js'
 import Input from './Input.js';
 import api from '../utils/Api.js';
 import Card from './Card.js';
+import editIcon from '../images/edit-button.svg';
 
 export default function Main(props) {
   const [username, setUsername] = React.useState();
@@ -32,7 +33,7 @@ export default function Main(props) {
       <section className="profile">
         <div className="profile__avatar-container">
           <img src={userAvatar} alt="profile" className="profile__avatar" />
-          <img src="./images/edit-button.svg" alt="edit profile"
+          <img src={editIcon} alt="edit profile"
             className="edit-button edit-button_place_avatar"
             onClick={props.onEditAvatar} />
         </div>
