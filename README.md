@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-##View in GH Pages
+## Home in GH Pages
 [https://maritesmilner.github.io/around-react/](https://maritesmilner.github.io/around-react/)
 
 ## Available Scripts
