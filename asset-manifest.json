@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/around-react/static/css/main.b3a025ee.chunk.css",
+    "main.js": "/around-react/static/js/main.228fb260.chunk.js",
+    "main.js.map": "/around-react/static/js/main.228fb260.chunk.js.map",
+    "runtime-main.js": "/around-react/static/js/runtime-main.a5c5d8c7.js",
+    "runtime-main.js.map": "/around-react/static/js/runtime-main.a5c5d8c7.js.map",
+    "static/js/2.1179f06f.chunk.js": "/around-react/static/js/2.1179f06f.chunk.js",
+    "static/js/2.1179f06f.chunk.js.map": "/around-react/static/js/2.1179f06f.chunk.js.map",
+    "index.html": "/around-react/index.html",
+    "precache-manifest.c163abbefda69224a571f51fc1316f28.js": "/around-react/precache-manifest.c163abbefda69224a571f51fc1316f28.js",
+    "service-worker.js": "/around-react/service-worker.js",
+    "static/css/main.b3a025ee.chunk.css.map": "/around-react/static/css/main.b3a025ee.chunk.css.map",
+    "static/js/2.1179f06f.chunk.js.LICENSE.txt": "/around-react/static/js/2.1179f06f.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/around-react/static/media/trash_white.4220563a.svg",
+    "static/media/logo.svg": "/around-react/static/media/logo.8f7611ae.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a5c5d8c7.js",
+    "static/js/2.1179f06f.chunk.js",
+    "static/css/main.b3a025ee.chunk.css",
+    "static/js/main.228fb260.chunk.js"
+  ]
+}
