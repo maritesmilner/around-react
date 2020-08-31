@@ -11,40 +11,29 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
 
   const handleCardClick = (card) => {
-    const imagePopupElement = document.querySelector('.place-popup');
-    imagePopupElement.querySelector('.form__pic').src = card.link;
-    imagePopupElement.querySelector('.form__pic-name').textContent = card.name;
-    imagePopupElement.classList.remove('hide');
     setSelectedCard(card);
     setIsImagePopupOpen(true);
   }
   const handleEditAvatarClick = () => {
-    document.querySelector('.edit-profile-picture').classList.remove('hide');
     setIsEditAvatarPopupOpen(true);
   };
   const handleEditProfileClick = () => {
-    document.querySelector('.edit-profile-form').classList.remove('hide');
     setIsEditProfilePopupOpen(true);
   };
   const handleAddPlaceClick = () => {
-    document.querySelector('.new-place-form').classList.remove('hide');
     setIsAddPlacePopupOpen(true);
   };
   const closeAllPopups = () => {
     if(isEditProfilePopupOpen) {
-      document.querySelector('.edit-profile-form').classList.add('hide');
       setIsEditProfilePopupOpen(false);
     }
     if(isAddPlacePopupOpen) {
-      document.querySelector('.new-place-form').classList.add('hide');
       setIsAddPlacePopupOpen(false);
     }
     if(isEditAvatarPopupOpen) {
-      document.querySelector('.edit-profile-picture').classList.add('hide');
-      setIsAddPlacePopupOpen(false);
+      setIsEditAvatarPopupOpen(false);
     }
     if(isImagePopupOpen) {
-      document.querySelector('.place-popup').classList.add('hide');
       setSelectedCard({});
       setIsImagePopupOpen(false);
     }
@@ -54,10 +43,14 @@ function App() {
     <div className="page">
     <Header />
     <Main onEditProfile={handleEditProfileClick}
+      isEditProfilePopupOpen={isEditProfilePopupOpen}
       onAddPlace={handleAddPlaceClick}
+      isAddPlacePopupOpen={isAddPlacePopupOpen}
       onEditAvatar={handleEditAvatarClick}
-      onClose={closeAllPopups}
+      isEditAvatarPopupOpen={isEditAvatarPopupOpen}
       onCardClick={handleCardClick}
+      isImagePopupOpen={isImagePopupOpen}
+      onClose={closeAllPopups}
       card={selectedCard} />
     <Footer />
   </div>

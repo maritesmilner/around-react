@@ -60,26 +60,23 @@ export default function Main(props) {
       </section>
 
       <PopupWithForm title="Edit profile" name="edit-profile-form"
-      isOpen={false} onClose={props.onClose} submitButtonLabel="Save">
+      isOpen={props.isEditProfilePopupOpen} onClose={props.onClose} submitButtonLabel="Save">
         <Input type="text" name="name" placeHolder="Name" minLength="2" maxLength="40" isRequired={true} />
         <Input type="text" name="about" placeHolder="Title" minLength="2" maxLength="200" isRequired={true} />
       </PopupWithForm>
 
       <PopupWithForm title="New place" name="new-place-form"
-      isOpen={false} onClose={props.onClose} submitButtonLabel="Create">
+      isOpen={props.isAddPlacePopupOpen} onClose={props.onClose} submitButtonLabel="Create">
         <Input type="text" name="name" placeHolder="Title" minLength="0" maxLength="30" isRequired={true} />
         <Input type="url" name="link" placeHolder="Image Link" isRequired={true} />
       </PopupWithForm>
 
-      <PopupWithForm title="Are you sure?" name="confirm-popup"
-      isOpen={false} onClose={props.onClose} submitButtonLabel="Yes" isConfirmPopup={true}/>
-
       <PopupWithForm title="Change profile picture" name="edit-profile-picture"
-      isOpen={false} onClose={props.onClose} submitButtonLabel="Save">
+      isOpen={props.isEditAvatarPopupOpen} onClose={props.onClose} submitButtonLabel="Save">
         <Input type="url" name="image-link" placeHolder="Image Link" isRequired={true} />
       </PopupWithForm>
 
-      <ImagePopup image={props.card.link} title={props.card.name} isOpen={false} onClose={props.onClose} />
+      <ImagePopup image={props.card.link} title={props.card.name} isOpen={props.isImagePopupOpen} onClose={props.onClose} />
     </main>
   );
 }
