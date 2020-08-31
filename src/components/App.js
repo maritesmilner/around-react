@@ -7,37 +7,46 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const editAvatarPopupElement = document.querySelector('.edit-profile-picture');
-  const addPlacePopupElement = document.querySelector('.new-place-form');
-  const editProfilePopupElement = document.querySelector('.edit-profile-form');
-  console.log(editProfilePopupElement);
-  console.log(addPlacePopupElement);
-  console.log(editAvatarPopupElement);
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
 
+  const handleCardClick = (card) => {
+    const imagePopupElement = document.querySelector('.place-popup');
+    imagePopupElement.querySelector('.form__pic').src = card.link;
+    imagePopupElement.querySelector('.form__pic-name').textContent = card.name;
+    imagePopupElement.classList.remove('hide');
+    setSelectedCard(card);
+    setIsImagePopupOpen(true);
+  }
   const handleEditAvatarClick = () => {
-    editAvatarPopupElement.classList.remove('hide');
+    document.querySelector('.edit-profile-picture').classList.remove('hide');
     setIsEditAvatarPopupOpen(true);
   };
   const handleEditProfileClick = () => {
-    this.classList.remove('hide');
+    document.querySelector('.edit-profile-form').classList.remove('hide');
     setIsEditProfilePopupOpen(true);
   };
   const handleAddPlaceClick = () => {
-    addPlacePopupElement.classList.remove('hide');
+    document.querySelector('.new-place-form').classList.remove('hide');
     setIsAddPlacePopupOpen(true);
   };
   const closeAllPopups = () => {
     if(isEditProfilePopupOpen) {
-      editProfilePopupElement.classList.add('hide');
+      document.querySelector('.edit-profile-form').classList.add('hide');
       setIsEditProfilePopupOpen(false);
     }
     if(isAddPlacePopupOpen) {
-      addPlacePopupElement.classList.add('hide');
+      document.querySelector('.new-place-form').classList.add('hide');
       setIsAddPlacePopupOpen(false);
     }
     if(isEditAvatarPopupOpen) {
-      editAvatarPopupElement.classList.add('hide');
+      document.querySelector('.edit-profile-picture').classList.add('hide');
       setIsAddPlacePopupOpen(false);
+    }
+    if(isImagePopupOpen) {
+      document.querySelector('.place-popup').classList.add('hide');
+      setSelectedCard({});
+      setIsImagePopupOpen(false);
     }
   }
 
@@ -47,7 +56,9 @@ function App() {
     <Main onEditProfile={handleEditProfileClick}
       onAddPlace={handleAddPlaceClick}
       onEditAvatar={handleEditAvatarClick}
-      onClose={closeAllPopups} />
+      onClose={closeAllPopups}
+      onCardClick={handleCardClick}
+      card={selectedCard} />
     <Footer />
   </div>
   );
