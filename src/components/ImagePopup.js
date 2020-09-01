@@ -1,5 +1,4 @@
 import React from 'react';
-import CloseButton from './CloseButton.js'
 
 export default function ImagePopup(props) {
   return (
@@ -8,7 +7,7 @@ export default function ImagePopup(props) {
       <div className="form form_display_pic">
         <img className="form__pic" src={props.image} alt={props.title} />
         <p className="form__pic-name">{props.title}</p>
-        <CloseButton onClose={props.onClose} />
+        <button type="button" className="form__close-button" onClick={props.onClose}></button>
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import CloseButton from './CloseButton.js'
 
 export default function PopupWithForm(props) {
 
@@ -12,7 +11,7 @@ export default function PopupWithForm(props) {
         <button type="submit" className="form__save-button form__save-button_disabled" disabled>{
           props.submitButtonLabel}
         </button>
-        <CloseButton onClose={props.onClose} />
+        <button type="button" className="form__close-button" onClick={props.onClose}></button>
       </form>
    </section>
   );
