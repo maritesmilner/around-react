@@ -2,6 +2,9 @@ import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
+import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js'
+import Input from './Input.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -43,15 +46,28 @@ function App() {
     <div className="page">
     <Header />
     <Main onEditProfile={handleEditProfileClick}
-      isEditProfilePopupOpen={isEditProfilePopupOpen}
       onAddPlace={handleAddPlaceClick}
-      isAddPlacePopupOpen={isAddPlacePopupOpen}
       onEditAvatar={handleEditAvatarClick}
-      isEditAvatarPopupOpen={isEditAvatarPopupOpen}
       onCardClick={handleCardClick}
-      isImagePopupOpen={isImagePopupOpen}
-      onClose={closeAllPopups}
-      card={selectedCard} />
+    />
+    <PopupWithForm title="Edit profile" name="edit-profile-form"
+    isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} submitButtonLabel="Save">
+      <Input type="text" name="name" placeHolder="Name" minLength="2" maxLength="40" isRequired={true} />
+      <Input type="text" name="about" placeHolder="Title" minLength="2" maxLength="200" isRequired={true} />
+    </PopupWithForm>
+
+    <PopupWithForm title="New place" name="new-place-form"
+    isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} submitButtonLabel="Create">
+      <Input type="text" name="name" placeHolder="Title" minLength="0" maxLength="30" isRequired={true} />
+      <Input type="url" name="link" placeHolder="Image Link" isRequired={true} />
+    </PopupWithForm>
+
+    <PopupWithForm title="Change profile picture" name="edit-profile-picture"
+    isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} submitButtonLabel="Save">
+      <Input type="url" name="image-link" placeHolder="Image Link" isRequired={true} />
+    </PopupWithForm>
+
+    <ImagePopup image={selectedCard.link} title={selectedCard.name} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
     <Footer />
   </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Card({card, onCardClick}) {
   return (
-    <li className="place" key={card._id}>
+    <li className="place">
       <img className="place__picture" alt="place" src={card.link} onClick={()=>onCardClick(card)}/>
       <button className="trash-button"></button>
       <div className="place__name-group">
