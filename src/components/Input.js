@@ -1,6 +1,15 @@
-import React from 'react';
+import React from "react";
 
-export default function Input({type, name, placeHolder, minLength, maxLength, isRequired}) {
+export default function Input({
+  type,
+  name,
+  placeHolder,
+  minLength,
+  maxLength,
+  isRequired,
+  onChange,
+  defaultValue,
+}) {
   return (
     <>
       <input
@@ -12,6 +21,8 @@ export default function Input({type, name, placeHolder, minLength, maxLength, is
         minLength={minLength}
         maxLength={maxLength}
         required={isRequired}
+        onChange={onChange}
+        defaultValue={defaultValue}
       />
       <span className="form__input-error" id={`${name}-error`}></span>
     </>
