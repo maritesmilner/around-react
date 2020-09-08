@@ -1,30 +1,27 @@
 import React from "react";
 
-export default function Input({
-  type,
-  name,
-  placeHolder,
-  minLength,
-  maxLength,
-  isRequired,
-  onChange,
-  defaultValue,
-}) {
-  return (
-    <>
-      <input
-        type={type}
-        placeholder={placeHolder}
-        name={name}
-        className={`form__input form__input_type_${name}`}
-        id={name}
-        minLength={minLength}
-        maxLength={maxLength}
-        required={isRequired}
-        onChange={onChange}
-        defaultValue={defaultValue}
-      />
-      <span className="form__input-error" id={`${name}-error`}></span>
-    </>
-  );
+export default class Input extends React.Component {
+  render() {
+    return (
+      <>
+        <input
+          type={this.props.type}
+          placeholder={this.props.placeHolder}
+          name={this.props.name}
+          className={`form__input form__input_type_${this.props.name}`}
+          id={this.props.name}
+          minLength={this.props.minLength}
+          maxLength={this.props.maxLength}
+          required={this.props.isRequired}
+          onChange={this.props.onChange}
+          defaultValue={this.props.defaultValue}
+          ref={this.props.refs}
+        />
+        <span
+          className="form__input-error"
+          id={`${this.props.name}-error`}
+        ></span>
+      </>
+    );
+  }
 }
