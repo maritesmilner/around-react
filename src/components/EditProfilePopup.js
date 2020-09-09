@@ -5,11 +5,27 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 
 export default function EditProfilePopup(props) {
   const [values, setValues] = React.useState({});
+  const [errorFlags, setErrorFlags] = React.useState({ name: true });
   const currentUser = React.useContext(CurrentUserContext);
+  const [isInputError, setIsInputError] = React.useState(true);
 
-  function handleChange(e) {
-    e.persist();
-    setValues({ ...values, [e.target.name]: e.target.value });
+  React.useEffect(() => {
+    setIsInputError(
+      Object.keys(errorFlags).some(function (k) {
+        return errorFlags[k] === true;
+      })
+    );
+  }, [errorFlags]);
+
+  function handleChange(e, errorFlag) {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+    setErrorFlags({
+      ...errorFlags,
+      [e.target.name]: errorFlag,
+    });
   }
 
   function handleSubmit(e) {
@@ -28,6 +44,7 @@ export default function EditProfilePopup(props) {
       onClose={props.onClose}
       submitButtonLabel="Save"
       onSubmit={handleSubmit}
+      isInputError={isInputError}
     >
       <Input
         type="text"

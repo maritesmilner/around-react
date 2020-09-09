@@ -8,6 +8,10 @@ class EditAvatarPopup extends React.Component {
     this.avatarRef = React.createRef();
   }
 
+  handleChange(e) {
+    //do nothing as value is passed by ref according to project brief.
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.onUpdateAvatar(this.avatarRef.current.value);
@@ -29,6 +33,7 @@ class EditAvatarPopup extends React.Component {
           refs={this.avatarRef}
           placeHolder="Image Link"
           isRequired={true}
+          onChange={this.handleChange}
         />
       </PopupWithForm>
     );
