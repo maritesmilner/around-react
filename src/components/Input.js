@@ -34,7 +34,6 @@ export default class Input extends React.Component {
           required={this.props.isRequired}
           onChange={this.validateChange}
           ref={this.props.refs}
-          value={this.inputValue}
           defaultValue={this.props.defaultValue}
         />
         <span
