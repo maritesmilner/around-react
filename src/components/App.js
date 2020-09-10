@@ -21,6 +21,8 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [isSaving, setIsSaving] = React.useState(false);
+  const [editProfileChildCount, setEditProfileChildCount] = React.useState(0);
 
   React.useEffect(() => {
     api
@@ -29,26 +31,38 @@ function App() {
         setCurrentUser(user);
       })
       .catch((err) => console.log(err));
-  }, []);
 
-  React.useEffect(() => {
     api
       .getCards()
       .then((cards) => setCards(cards))
       .catch((err) => console.log(err));
   }, []);
 
-  function handleAddPlace(name, link) {
+  const handleUserUpdate = (user) => {
+    setIsSaving(true);
+    api
+      .updateUserInfo(user)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsSaving(false);
+        setIsEditProfilePopupOpen(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleAddPlace = (name, link) => {
+    setIsSaving(true);
     api
       .addCard(name, link)
       .then((newCard) => {
         setCards([newCard, ...cards]);
+        setIsSaving(false);
+        setIsAddPlacePopupOpen(false);
       })
       .catch((err) => console.log(err));
-    setIsAddPlacePopupOpen(false);
-  }
+  };
 
-  function handleCardLike(cardId, isLiked) {
+  const handleCardLike = (cardId, isLiked) => {
     api
       .changeLikeCardStatus(cardId, !isLiked)
       .then((newCard) => {
@@ -56,9 +70,9 @@ function App() {
         setCards(newCards);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
-  function handleCardDelete(cardId) {
+  const handleCardDelete = (cardId) => {
     api
       .removeCard(cardId)
       .then((res) => {
@@ -67,26 +81,18 @@ function App() {
         setCards(newCards);
       })
       .catch((err) => console.log(err));
-  }
-
-  const handleUserUpdate = (user) => {
-    api
-      .updateUserInfo(user)
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
-    setIsEditProfilePopupOpen(false);
   };
 
   const handleAvatarUpdate = (avatar) => {
+    setIsSaving(true);
     api
       .updateUserAvatar(avatar)
       .then((res) => {
         setCurrentUser(res);
+        setIsSaving(false);
+        setIsEditAvatarPopupOpen(false);
       })
       .catch((err) => console.log(err));
-    setIsEditAvatarPopupOpen(false);
   };
 
   const handleCardClick = (card) => {
@@ -118,6 +124,10 @@ function App() {
     }
   };
 
+  const editProfileChildrenCounter = (count) => {
+    setEditProfileChildCount(count);
+  };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -135,16 +145,21 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUserUpdate}
+          isSaving={isSaving}
+          childCounter={editProfileChildrenCounter}
+          childCount={editProfileChildCount}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleAvatarUpdate}
+          isSaving={isSaving}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlace}
+          isSaving={isSaving}
         />
         <ImagePopup
           image={selectedCard.link}

@@ -6,11 +6,13 @@ class EditAvatarPopup extends React.Component {
   constructor(props) {
     super(props);
     this.avatarRef = React.createRef();
+    this.state = {};
   }
 
-  handleChange(e) {
-    //do nothing as value is passed by ref according to project brief.
-  }
+  handleChange = ({ inputName, isInputError }) => {
+    //only collect error status as value is passed by ref according to project brief.
+    this.setState({ ...this.state, [inputName]: isInputError });
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -24,8 +26,9 @@ class EditAvatarPopup extends React.Component {
         name="edit-profile-picture"
         isOpen={this.props.isOpen}
         onClose={this.props.onClose}
-        submitButtonLabel="Save"
+        submitButtonLabel={this.props.isSaving ? "Saving..." : "Save"}
         onSubmit={this.handleSubmit}
+        errorFlags={this.state}
       >
         <Input
           type="url"
@@ -33,7 +36,7 @@ class EditAvatarPopup extends React.Component {
           refs={this.avatarRef}
           placeHolder="Image Link"
           isRequired={true}
-          onChange={this.handleChange}
+          onInputChange={this.handleChange}
         />
       </PopupWithForm>
     );

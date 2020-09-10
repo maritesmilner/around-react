@@ -2,18 +2,19 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
 
-export default function AddPlacePopup(props) {
+const AddPlacePopup = (props) => {
   const [values, setValues] = React.useState({});
+  const [errorFlags, setErrorFlags] = React.useState({});
 
-  function handleChange(e) {
-    e.persist();
-    setValues({ ...values, [e.target.name]: e.target.value });
-  }
+  const handleChange = ({ inputName, inputValue, isInputError }) => {
+    setValues({ ...values, [inputName]: inputValue });
+    setErrorFlags({ ...errorFlags, [inputName]: isInputError });
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     props.onAddPlace(values.name, values.link);
-  }
+  };
 
   return (
     <PopupWithForm
@@ -21,8 +22,9 @@ export default function AddPlacePopup(props) {
       name="new-place-form"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      submitButtonLabel="Create"
+      submitButtonLabel={props.isSaving ? "Saving..." : "Create"}
       onSubmit={handleSubmit}
+      errorFlags={errorFlags}
     >
       <Input
         type="text"
@@ -32,7 +34,7 @@ export default function AddPlacePopup(props) {
         minLength="0"
         maxLength="30"
         isRequired={true}
-        onChange={handleChange}
+        onInputChange={handleChange}
       />
       <Input
         type="url"
@@ -40,8 +42,10 @@ export default function AddPlacePopup(props) {
         value={values.link}
         placeHolder="Image Link"
         isRequired={true}
-        onChange={handleChange}
+        onInputChange={handleChange}
       />
     </PopupWithForm>
   );
-}
+};
+
+export default AddPlacePopup;

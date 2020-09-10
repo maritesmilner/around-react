@@ -3,18 +3,19 @@ import React from "react";
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isInputError: false, inputErrorMessage: "" };
+    this.state = {};
   }
+
   validateChange = (e) => {
-    e.persist();
-    e.target.validity.valid
-      ? this.setState({ isInputError: false, inputErrorMessage: "" }, () =>
-          this.props.onChange(e, this.state.isInputError)
-        )
-      : this.setState(
-          { isInputError: true, inputErrorMessage: e.target.validationMessage },
-          () => this.props.onChange(e, this.state.isInputError)
-        );
+    this.setState(
+      {
+        inputName: e.target.name,
+        inputValue: e.target.value,
+        isInputError: !e.target.validity.valid,
+        inputErrorMessage: e.target.validationMessage,
+      },
+      () => this.props.onInputChange(this.state)
+    );
   };
 
   render() {
@@ -32,8 +33,9 @@ export default class Input extends React.Component {
           maxLength={this.props.maxLength}
           required={this.props.isRequired}
           onChange={this.validateChange}
-          defaultValue={this.props.defaultValue}
           ref={this.props.refs}
+          value={this.inputValue}
+          defaultValue={this.props.defaultValue}
         />
         <span
           className={`form__input-error ${

@@ -3,30 +3,24 @@ import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-export default function EditProfilePopup(props) {
-  const [values, setValues] = React.useState({});
-  const [errorFlags, setErrorFlags] = React.useState({ name: true });
+function EditProfilePopup(props) {
+  const [errorFlags, setErrorFlags] = React.useState({});
   const currentUser = React.useContext(CurrentUserContext);
-  const [isInputError, setIsInputError] = React.useState(true);
+  const [values, setValues] = React.useState({});
 
   React.useEffect(() => {
-    setIsInputError(
-      Object.keys(errorFlags).some(function (k) {
-        return errorFlags[k] === true;
-      })
-    );
-  }, [errorFlags]);
+    setValues(currentUser);
+  }, [currentUser]);
 
-  function handleChange(e, errorFlag) {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-    setErrorFlags({
-      ...errorFlags,
-      [e.target.name]: errorFlag,
-    });
-  }
+  const handleChange = ({
+    inputName,
+    inputValue,
+    isInputError,
+    inputErrorMessage,
+  }) => {
+    setValues({ ...values, [inputName]: inputValue });
+    setErrorFlags({ ...errorFlags, [inputName]: isInputError });
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,6 +28,7 @@ export default function EditProfilePopup(props) {
       ...currentUser,
       ...values,
     });
+    setValues({});
   }
 
   return (
@@ -42,32 +37,33 @@ export default function EditProfilePopup(props) {
       name="edit-profile-form"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      submitButtonLabel="Save"
+      submitButtonLabel={props.isSaving ? "Saving..." : "Save"}
       onSubmit={handleSubmit}
-      isInputError={isInputError}
+      errorFlags={errorFlags}
     >
       <Input
         type="text"
         name="name"
-        defaultValue={currentUser.name}
         value={values.name}
         placeHolder="Name"
         minLength="2"
         maxLength="40"
         isRequired={true}
-        onChange={handleChange}
+        onInputChange={handleChange}
+        defaultValue={values.name}
       />
       <Input
         type="text"
         name="about"
-        defaultValue={currentUser.about}
         value={values.about}
         placeHolder="Title"
         minLength="2"
         maxLength="200"
         isRequired={true}
-        onChange={handleChange}
+        onInputChange={handleChange}
+        defaultValue={values.about}
       />
     </PopupWithForm>
   );
 }
+export default EditProfilePopup;

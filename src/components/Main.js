@@ -4,13 +4,17 @@ import editIcon from "../images/edit-button.svg";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 export default function Main(props) {
-  const user = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container">
-          <img src={user.avatar} alt="profile" className="profile__avatar" />
+          <img
+            src={currentUser.avatar}
+            alt="profile"
+            className="profile__avatar"
+          />
           <img
             src={editIcon}
             alt="edit profile"
@@ -20,7 +24,7 @@ export default function Main(props) {
         </div>
         <div className="profile__info">
           <div className="profile__person">
-            <h1 className="profile__name">{user.name}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               className="edit-button"
               type="button"
@@ -30,7 +34,7 @@ export default function Main(props) {
               onClick={props.onEditProfile}
             ></button>
           </div>
-          <p className="profile__title">{user.about}</p>
+          <p className="profile__title">{currentUser.about}</p>
         </div>
         <button
           className="add-button"
