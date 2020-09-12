@@ -1,5 +1,7 @@
 import React from "react";
 
+//has to be a class component as ref ref attribute can't be used on function components
+//https://reactjs.org/docs/refs-and-the-dom.html
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
