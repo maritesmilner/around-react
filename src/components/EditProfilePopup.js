@@ -6,7 +6,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 function EditProfilePopup(props) {
   const [errorFlags, setErrorFlags] = React.useState({});
   const currentUser = React.useContext(CurrentUserContext);
-  const [values, setValues] = React.useState({});
+  const [values, setValues] = React.useState({ name: "", about: "" });
 
   React.useEffect(() => {
     setValues(currentUser);
@@ -28,7 +28,7 @@ function EditProfilePopup(props) {
       ...currentUser,
       ...values,
     });
-    setValues({});
+    setErrorFlags({});
   }
 
   return (
@@ -50,7 +50,6 @@ function EditProfilePopup(props) {
         maxLength="40"
         isRequired={true}
         onInputChange={handleChange}
-        defaultValue={values.name}
       />
       <Input
         type="text"
@@ -61,7 +60,6 @@ function EditProfilePopup(props) {
         maxLength="200"
         isRequired={true}
         onInputChange={handleChange}
-        defaultValue={values.about}
       />
     </PopupWithForm>
   );

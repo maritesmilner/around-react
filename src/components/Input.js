@@ -3,12 +3,19 @@ import React from "react";
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { inputValue: "" };
+  }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.value !== prevProps.value) {
+      this.setState({ ...this.state, inputValue: this.props.value });
+    }
   }
 
   validateChange = (e) => {
     this.setState(
       {
+        ...this.state,
         inputName: e.target.name,
         inputValue: e.target.value,
         isInputError: !e.target.validity.valid,
@@ -34,7 +41,7 @@ export default class Input extends React.Component {
           required={this.props.isRequired}
           onChange={this.validateChange}
           ref={this.props.refs}
-          defaultValue={this.props.defaultValue}
+          value={this.state.inputValue || ""}
         />
         <span
           className={`form__input-error ${

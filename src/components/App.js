@@ -22,7 +22,6 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isSaving, setIsSaving] = React.useState(false);
-  const [editProfileChildCount, setEditProfileChildCount] = React.useState(0);
 
   React.useEffect(() => {
     api
@@ -124,10 +123,6 @@ function App() {
     }
   };
 
-  const editProfileChildrenCounter = (count) => {
-    setEditProfileChildCount(count);
-  };
-
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -146,8 +141,6 @@ function App() {
           onClose={closeAllPopups}
           onUpdateUser={handleUserUpdate}
           isSaving={isSaving}
-          childCounter={editProfileChildrenCounter}
-          childCount={editProfileChildCount}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

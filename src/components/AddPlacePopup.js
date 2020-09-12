@@ -14,6 +14,8 @@ const AddPlacePopup = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.onAddPlace(values.name, values.link);
+    setValues({});
+    setErrorFlags({});
   };
 
   return (

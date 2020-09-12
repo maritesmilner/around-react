@@ -5,18 +5,26 @@ import Input from "./Input";
 class EditAvatarPopup extends React.Component {
   constructor(props) {
     super(props);
+    //createRef is for class components, for functional components, use useRef
     this.avatarRef = React.createRef();
     this.state = {};
   }
 
-  handleChange = ({ inputName, isInputError }) => {
+  handleChange = ({ inputName, isInputError, inputValue }) => {
     //only collect error status as value is passed by ref according to project brief.
-    this.setState({ ...this.state, [inputName]: isInputError });
+    this.setState({
+      inputError: { [inputName]: isInputError },
+      value: inputValue,
+    });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.onUpdateAvatar(this.avatarRef.current.value);
+    this.setState({
+      value: "",
+      inputError: {},
+    });
   };
 
   render() {
@@ -28,7 +36,7 @@ class EditAvatarPopup extends React.Component {
         onClose={this.props.onClose}
         submitButtonLabel={this.props.isSaving ? "Saving..." : "Save"}
         onSubmit={this.handleSubmit}
-        errorFlags={this.state}
+        errorFlags={this.state.inputError}
       >
         <Input
           type="url"
@@ -37,6 +45,7 @@ class EditAvatarPopup extends React.Component {
           placeHolder="Image Link"
           isRequired={true}
           onInputChange={this.handleChange}
+          value={this.state.value}
         />
       </PopupWithForm>
     );

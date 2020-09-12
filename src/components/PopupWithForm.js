@@ -2,14 +2,22 @@ import React from "react";
 
 export default function PopupWithForm(props) {
   const [isInputError, setIsInputError] = React.useState(true);
+  const children = props.children;
 
   React.useEffect(() => {
-    if (props.errorFlags) {
-      const arr = Object.keys(props.errorFlags);
-      arr.length === React.Children.count(props.children) &&
-        setIsInputError(arr.some((k) => props.errorFlags[k] === true));
+    if (props.errorFlags && Object.keys(props.errorFlags).length > 0) {
+      const flagsArr = Object.keys(props.errorFlags);
+      const hasEmpty = React.Children.toArray(children).some((child) =>
+        child.props.value ? false : true
+      );
+      hasEmpty
+        ? setIsInputError(true)
+        : setIsInputError(flagsArr.some((k) => props.errorFlags[k] === true));
+    } else {
+      //reset form
+      setIsInputError(true);
     }
-  }, [props.errorFlags, props.children]);
+  }, [props.errorFlags, children]);
 
   return (
     <section className={props.isOpen ? `${props.name}` : `${props.name} hide`}>
